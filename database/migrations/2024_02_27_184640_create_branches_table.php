@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->text('address');
-            $table->text('address_link');
+            $table->foreignId('region_id')->constrained()->onDelete('cascade');
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
+            $table->text('address')->nullable();
+            $table->text('address_link')->nullable();
+            $table->text('image')->nullable();
+            $table->text('first_additional_field')->nullable();
+            $table->text('second_additional_field')->nullable();
             $table->timestamps();
         });
     }

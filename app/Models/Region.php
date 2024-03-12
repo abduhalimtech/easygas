@@ -13,6 +13,10 @@ class Region extends Model
         'name',
     ];
 
+    public function branches()
+    {
+        return $this->hasMany(Branch::class);
+    }
 
     public function clients()
     {
