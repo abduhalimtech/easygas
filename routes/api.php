@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\Api\NewsController;
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RegionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,8 @@ Route::name('api.')->group(function () {
     Route::get('/cars-by-brand/{id}', [CarController::class, 'carsByBrand']);
     Route::get('/all-brands', [BrandController::class, 'allBrands']);
     Route::get('/all-regions', [RegionController::class, 'allRegions']);
+    Route::get('/all-products', [ProductController::class, 'allProducts']);
+    Route::get('/products-by-car/{id}', [ProductController::class, 'productsByCar']);
 
     Route::post('/loginOrRegister', [AuthController::class, 'loginOrRegister']);
 
