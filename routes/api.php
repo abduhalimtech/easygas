@@ -35,6 +35,7 @@ Route::name('api.')->group(function () {
     Route::get('/all-products', [ProductController::class, 'allProducts']);
     Route::get('/products-by-car/{id}', [ProductController::class, 'productsByCar']);
     Route::get('/all-branches', [BranchController::class, 'allBranches']);
+    Route::get('/branches-by-region/{id}', [BranchController::class, 'branchesByRegion']);
 
     Route::post('/loginOrRegister', [AuthController::class, 'loginOrRegister']);
 
