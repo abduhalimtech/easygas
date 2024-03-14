@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BrandController;
+use App\Http\Controllers\Api\CarController;
+use App\Http\Controllers\Api\RegionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +20,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+Route::name('api.')->group(function () {
+
+    Route::get('/all-cars', [CarController::class, 'allCars']);
+    Route::get('/cars-by-brand/{id}', [CarController::class, 'carsByBrand']);
+    Route::get('/all-brands', [BrandController::class, 'allBrands']);
+    Route::get('/all-regions', [RegionController::class, 'allRegions']);
+
+    Route::post('/loginOrRegister', [AuthController::class, 'loginOrRegister']);
+
+    Route::middleware(['auth:sanctum'])->group(function () {
+
+
+    });
+
 });
