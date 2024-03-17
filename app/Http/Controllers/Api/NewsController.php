@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function allNews()
+    public function index()
     {
         $items = News::all();
         return NewsResource::collection($items);

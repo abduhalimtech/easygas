@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class RegionController extends Controller
 {
-    public function allRegions()
+    public function index()
     {
         $items = Region::all();
         return RegionResource::collection($items);

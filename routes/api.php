@@ -28,22 +28,34 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::name('api.')->group(function () {
 
-    Route::get('/all-cars', [CarController::class, 'allCars']);
-    Route::get('/cars-by-brand/{id}', [CarController::class, 'carsByBrand']);
-    Route::get('/all-brands', [BrandController::class, 'allBrands']);
-    Route::get('/all-regions', [RegionController::class, 'allRegions']);
-    Route::get('/all-products', [ProductController::class, 'allProducts']);
-    Route::get('/products-by-car/{id}', [ProductController::class, 'productsByCar']);
-    Route::get('/all-branches', [BranchController::class, 'allBranches']);
-    Route::get('/branches-by-region/{id}', [BranchController::class, 'branchesByRegion']);
+    // cars
+    Route::get('/cars', [CarController::class, 'index']);
+    Route::get('/brands/{brandId}/cars', [CarController::class, 'byBrand']);
 
-    Route::post('/loginOrRegister', [AuthController::class, 'loginOrRegister']);
+    // brands
+    Route::get('/brands', [BrandController::class, 'index']);
+
+    // regions
+    Route::get('/regions', [RegionController::class, 'index']);
+
+    // authentication
+    Route::post('/auth/login-register', [AuthController::class, 'loginOrRegister']);
 
 
     Route::middleware(['auth:sanctum'])->group(function () {
-        Route::get('/all-news', [NewsController::class, 'allNews']);
-        //
+        // news
+        Route::get('/news', [NewsController::class, 'index']);
+
+        // products
+        Route::get('/products', [ProductController::class, 'index']);
+        Route::get('/cars/{carId}/product-categories', [ProductController::class, 'categoriesByCar']);
+        Route::get('/cars/{carId}/products', [ProductController::class, 'productsByCar']);
+        Route::get('/cars/{carId}/categories/{categoryId}/products', [ProductController::class, 'productsByCarAndCategory']);
+        Route::get('/products/{productId}', [ProductController::class, 'show']);
+
+        // branches
+        Route::get('/branches', [BranchController::class, 'index']);
+        Route::get('/regions/{regionId}/branches', [BranchController::class, 'byRegion']);
 
     });
-
 });

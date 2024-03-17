@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-    public function allBrands()
+    public function index()
     {
         $items = Brand::all();
         return BrandResource::collection($items);

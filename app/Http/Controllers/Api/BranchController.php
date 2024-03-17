@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
 
 class BranchController extends Controller
 {
-    public function allBranches()
+    public function index()
     {
         $items = Branch::all();
         return BranchResource::collection($items);
     }
 
-    public function branchesByRegion($id)
+    public function byRegion($id)
     {
         $region = Region::findOrFail($id);
         $items = $region->branches;
