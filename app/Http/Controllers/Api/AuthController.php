@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -44,5 +45,9 @@ class AuthController extends Controller
                 'token' => $token,
             ]);
         }
+    }
+    public function getClient(Request $request)
+    {
+        return new ClientResource($request->user());
     }
 }

@@ -43,6 +43,9 @@ Route::name('api.')->group(function () {
 
 
     Route::middleware(['auth:sanctum'])->group(function () {
+        //clients
+        Route::get('/client', [AuthController::class, 'getClient']);
+
         // news
         Route::get('/news', [NewsController::class, 'index']);
 
