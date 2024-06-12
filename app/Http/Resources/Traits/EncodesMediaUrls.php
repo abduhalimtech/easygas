@@ -19,13 +19,14 @@ trait EncodesMediaUrls
             $pathParts = explode('/', $filePath);
 
             // Encode the filename part, which is the last part of the path
-            $pathParts[count($pathParts) - 1] = urlencode(end($pathParts));
+            // $pathParts[count($pathParts) - 1] = urlencode(end($pathParts));
 
             // Rebuild the path with the encoded filename part
             $encodedFilePath = implode('/', $pathParts);
 
             // Generate a full URL for the encoded file path
             return Storage::url($encodedFilePath);
+            // return url('/api/videos/storage/' . $encodedFilePath);
         }, $files);
     }
 }

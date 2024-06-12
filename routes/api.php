@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RegionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\SerialNumbersController;
+use Illuminate\Support\Facades\File;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,5 +62,30 @@ Route::name('api.')->group(function () {
         Route::get('/branches', [BranchController::class, 'index']);
         Route::get('/regions/{regionId}/branches', [BranchController::class, 'byRegion']);
 
+
+        Route::post('/serial-number/check', [SerialNumbersController::class, 'checkSerialNumber']);
+
+
     });
+
+
+
+    Route::get('/videos/{filename}', function ($filename) {
+        $path = storage_path('app/public/storage/news-media/' . $filename);
+
+        if (!File::exists($path)) {
+            return response()->json(['error' => 'File not found.'], 404);
+        }
+
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $headers = [
+            'Content-Type' => $type,
+            'Content-Disposition' => 'inline',
+        ];
+
+        return response($file, 200, $headers);
+    })->where('filename', '.*');
+
 });

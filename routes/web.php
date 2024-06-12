@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\SerialNumbersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,13 @@ Route::get('/', function () {
 });
 
 
+
+
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+    // Route::get('/vendor/voyager/serial-numbers','SerialNumbersController@create');
+    Route::get('serial-numbers', [SerialNumbersController::class, 'create']);
+    Route::post('serial-numbers', [SerialNumbersController::class, 'store'])->name('serial-numbers.store');
+
 });
